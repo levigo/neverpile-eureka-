@@ -14,6 +14,19 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
+    ## Enable Caching
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: ${{ runner.os }}-node-
+    - uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+                
     ## NodeJS-Build
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -36,6 +49,6 @@ jobs:
     
     ## Deploy
     - name: Deploy package
-      if: success() && (github.ref == 'master' || github.ref == 'feature/build-webjar')
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/levigo -Dtoken=GH_TOKEN
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/feature/build-webjar'
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/levigo -Dtoken=${{ secrets.GITHUB_TOKEN }}
       
