@@ -14,6 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
+    ## Build-Number
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v1 
+      with:
+        token: ${{secrets.GITHUB_TOKEN}}
+    - name: Print new build number
+      run: echo Build number is $BUILD_NUMBER
+               
     ## Enable Caching
     - uses: actions/cache@v1
       with:
@@ -45,12 +54,19 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: |
+        export project_version=$(mvn help:evaluate -N -Dexpression=project.version | grep -v '\[' | tail -1 | sed -r -e 's/[-.](snapshot|local)$//i' -e 's/\s+//g')
+        export release_version=${project_version}.${{ steps.buildnumber.outputs.build_number }}
+        echo Truncated version found to be ${project_version}, releasing as ${release_version}
+        mvn versions:set -DnewVersion=${release_version} 
+        mvn -B package --file pom.xml
     
     ## Deploy
     - name: Deploy package
       if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/feature/build-webjar'
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/levigo
       env:
-            GITHUB_USERNAME: x-access-token
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        mkdir -p ~/.m2
+        echo "<settings><servers><server><id>github</id><username>x-access-token</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml 
+        mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/levigo/neverpile-eureka-web-client

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <packaging>jar</packaging>
   <groupId>com.neverpile.eureka.client</groupId>
   <artifactId>neverpile-eureka-client-webjar</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
 
   <name>neverpile eureka client webjar</name>
   <description>WebJar for neverpile eureka</description>
@@ -14,41 +14,25 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!--<destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>-->
+    <!--<destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir> -->
     <destDir>${project.build.outputDirectory}/META-INF/resources</destDir>
     <requirejs>
-            {
-                "paths": {
-                },
-                "shim": {
-                }
-            }
+      {
+      "paths": {
+      },
+      "shim": {
+      }
+      }
     </requirejs>
   </properties>
-  
-  <distributionManagement>
-     <repository>
-       <id>github</id>
-       <name>GitHub OWNER Apache Maven Packages</name>
-       <url>https://maven.pkg.github.com/levigo/neverpile-eureka-web-client</url>
-     </repository>
-  </distributionManagement>
 
-  <servers>
-    <server>
-        <id>github</id>
-        <username>${env.GITHUB_USERNAME}</username>
-        <password>${env.GITHUB_TOKEN}</password>
-    </server>
-  </servers>
-  
   <scm>
     <url>https://levigo.de/stash/projects/NP/repos/neverpile-eureka-angular-client/browse</url>
     <connection>scm:git:https://levigo.de/stash/scm/np/neverpile-eureka-angular-client.git</connection>
     <developerConnection>scm:git:ssh://git@levigo.de:7999/np/neverpile-eureka-angular-client.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -64,7 +48,7 @@
             <configuration>
               <target>
                 <copy todir="${destDir}">
-                  <fileset dir="dist/neverpile-web-admin"/>
+                  <fileset dir="dist/neverpile-web-admin" />
                 </copy>
               </target>
             </configuration>
