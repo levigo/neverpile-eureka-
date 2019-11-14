@@ -50,5 +50,7 @@ jobs:
     ## Deploy
     - name: Deploy package
       if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/feature/build-webjar'
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/levigo -Dtoken=${{ secrets.GITHUB_TOKEN }}
-      
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/levigo
+      env:
+            GITHUB_USERNAME: x-access-token
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

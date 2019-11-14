@@ -25,15 +25,23 @@
             }
     </requirejs>
   </properties>
+  
+  <distributionManagement>
+     <repository>
+       <id>github</id>
+       <name>GitHub OWNER Apache Maven Packages</name>
+       <url>https://maven.pkg.github.com/levigo/neverpile-eureka-web-client</url>
+     </repository>
+  </distributionManagement>
 
-  <developers>
-
-  </developers>
-
-  <licenses>
-
-  </licenses>
-
+  <servers>
+    <server>
+        <id>github</id>
+        <username>${env.GITHUB_USERNAME}</username>
+        <password>${env.GITHUB_TOKEN}</password>
+    </server>
+  </servers>
+  
   <scm>
     <url>https://levigo.de/stash/projects/NP/repos/neverpile-eureka-angular-client/browse</url>
     <connection>scm:git:https://levigo.de/stash/scm/np/neverpile-eureka-angular-client.git</connection>
