@@ -1,0 +1,33 @@
+
+table {
+  width: 100%;
+}
+.mat-card-content p {
+  margin-inline-start: 8px;
+}
+
+.mat-row.current {
+  font-weight: bold
+}
+
+.mat-row.obsolete {
+  opacity: 0.8
+}
+
+.mat-row.upcoming:hover {
+  background: rgba(0, 0, 0, .04);
+}
+
+/* Column Widths */
+.mat-column-timeline,
+.mat-column-actions {
+  width: 1%;
+}
+
+.mat-column-actions {
+  white-space: nowrap;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding-right: 10px;
+}

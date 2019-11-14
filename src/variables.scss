@@ -1,0 +1,11 @@
+$toolbar-height: 64px;
+
+/* Minimum supported resolution */
+$supported-min-width: 310px;
+
+/* Resoluton steps */
+
+$res-sm: "all and (max-width: 499px)";
+$res-md: "all and (min-width: 500px) and (max-width: 849px)";
+$res-nm: "all and (min-width: 850px) and (max-width: 1279px)";
+$res-lg: "all and (min-width: 1280px)";

@@ -1,0 +1,7 @@
+<mat-card class="mat-elevation-z2 link-card matCard">
+  <mat-tab-group class="mat-tab-group">
+    <mat-tab *ngFor="let snapIn of snapIns" label="{{snapIn.name| translate}}">
+      <ng-template [ngComponentOutlet]="snapIn.componentType"></ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

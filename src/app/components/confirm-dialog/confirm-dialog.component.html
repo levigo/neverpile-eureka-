@@ -1,0 +1,10 @@
+<form>
+  <h1 mat-dialog-title translate>dialog-attention</h1>
+  <div mat-dialog-content>
+    <p translate>{{data.confirmText}}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">{{'keywords-cancel' | translate}}</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{'keywords-ok' | translate}}</button>
+  </div>
+</form>

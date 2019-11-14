@@ -1,0 +1,52 @@
+
+.ruleAccordion .mat-expansion-panel-header-title,
+.ruleAccordion .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.ruleAccordion .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+#jsonEditorContainer{
+  overflow: auto;
+  display: inline-block;
+  width: 100%;
+  height: calc(100% - 5px);;
+  min-height: 210px;
+}
+
+::ng-deep mat-form-field{
+  min-width: 350px;
+}
+
+::ng-deep json-editor > div {
+  height: 100%;
+}
+
+#policyCard {
+  height: calc(100% - 48px);
+}
+#policyForm {
+  height: calc(100% - 30px);
+}
+#policyForm > mat-card-content {
+  height: calc(100% - 32px);
+  margin-bottom: 0px;
+  display: flex;
+  flex-flow: column;
+}
+#policyForm > mat-card-content > mat-tab-group,
+#policyForm > mat-card-content > mat-tab-group > div {
+  height: 100%;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  flex-grow: 1;
+}
+
+::ng-deep .mat-tab-body-content {
+  overflow: auto !important;
+  min-height: 215px;
+}

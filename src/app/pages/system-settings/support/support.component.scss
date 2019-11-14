@@ -1,0 +1,64 @@
+@import "./src/variables";
+.address {
+  font-size: 14px;
+  padding: 24px;
+  div {
+    padding: 5px 0px 5px 0px;
+    span {
+      display: inline-block;
+      margin-left: .5em;
+      a {
+        color: #4996DC;
+      }
+    }
+    i.fa,
+    i.far,
+    i.fas,
+    i.fab {
+      font-size: 1em;
+      margin: auto;
+      display: inline-block;
+    }
+    i.fa,
+    i.far,
+    i.fas,
+    i.fab:first-child {
+      vertical-align: top;
+      padding-top: .4em;
+    }
+  }
+}
+
+@media #{$res-sm} {
+  .map {
+    display: none;
+  }
+}
+
+@media #{$res-sm},
+#{$res-md} {
+  #adressContainer {
+    display: block;
+  }
+  .address {
+    display: block;
+    width: 100%;
+  }
+  .address:not(:last-child) {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+  }
+}
+
+@media #{$res-nm},
+#{$res-lg} {
+  #adressContainer {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .address {
+    display: inline-block;
+    width: 50%;
+  }
+}

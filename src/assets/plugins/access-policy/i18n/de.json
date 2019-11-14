@@ -1,0 +1,35 @@
+{
+  "access-policy": {
+    "start-of-validity": "Beginn Gültigkeit",
+    "current-policy": "Aktuelle Richtlinie",
+    "past-and-upcoming-policies": "Frühere und kommende Richtlinien",
+    "select-range": "Zeitraum, für den Richtlinien angezeigt werden sollen",
+    "start-date": "Startdatum",
+    "end-date": "Enddatum",
+    "timeline": {
+      "title": "Zeitachse",
+      "obsolete": "veraltet",
+      "current": "aktuell",
+      "upcoming": "kommend"
+    },
+    "edit": "Bearbeite Berechtigungs-Richtlinie",
+    "edit-new": "Bearbeite neue Berechtigungs-Richtlinie",
+    "default-effect": "Standard-Auswirkung",
+    "effect": {
+      "ALLOW": "Zugriff erlauben",
+      "DENY": "Zugriff verweigern"
+    },
+    "rules": "Regeln",
+    "subjects": "Subjekte",
+    "resources": "Ressourcen",
+    "actions": "Aktionen",
+    "add-rule": "Regel hinzufügen",
+    "no-rules": "Keine Regeln",
+    "no-rules-long": "Diese Richtlinie definiert keine Regeln",
+    "delete": "Richtlinie löschen",
+    "add-subject": "Text eingeben, um ein Subjekt hinzuzufügen",
+    "add-resource": "Text eingeben, um eine Ressource hinzuzufügen",
+    "add-action": "Text eingeben, um eine Aktion hinzuzufügen",
+    "conditions": "Bedingungen"
+  }
+}

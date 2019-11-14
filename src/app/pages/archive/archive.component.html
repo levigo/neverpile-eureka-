@@ -1,0 +1,12 @@
+<mat-card class="mat-elevation-z1" id="archiveCard">
+  <mat-tab-group dynamicHeight  [(selectedIndex)]="selectdeTab" id="archiveTabGroup">
+    <mat-tab label="{{'heading-search-query' | translate}}">
+      <!-- Search -->
+      <app-search #searchComponent></app-search>
+    </mat-tab>
+    <mat-tab label="{{'keywords-upload' | translate}}">
+      <!-- Upload -->
+      <app-document-upload (newDocumentId)="onNewDocumentIdCreated($event)"></app-document-upload>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

@@ -1,0 +1,56 @@
+<mat-toolbar id="main-toolbar" color="primary" class="mat-elevation-z6">
+  <button mat-button (click)="onMenubuttonClicked()" id="hamburger-button">
+    <i class="fas fa-bars"></i>
+  </button>
+  <img class="neverpileLogo" alt="Neverpile Logo" src="/assets/images/neverpile_logo.svg">
+  <div id="section-title">
+    <span>{{sectionTitle | translate}}</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Language -->
+  <button mat-button [matMenuTriggerFor]="languageMenuButton" id="languageMenuButton">
+    <i class="fas fa-globe fa-lg"></i>
+  </button>
+  <mat-menu #languageMenuButton="matMenu" overlapTrigger="false">
+      <button class="languageButton menuOption" *ngFor="let item of this.language" mat-menu-item (click)="switchLanguage(item.lang)" [ngClass]="{'active': translate.store.currentLang == item.lang}">
+          <img width="24" alt={{item.title}} src={{item.image}}>
+          <span>{{item.title}}</span>
+     </button>
+  </mat-menu>
+
+  <!-- User -->
+  <button #userMenuBtn *ngIf="auth" mat-button class="userMenuBtn" [matMenuTriggerFor]="userMenu">
+    <span>{{currentUser}}</span>
+    <i class="far fa-user-circle"></i>
+  </button>
+  <button *ngIf="!auth" mat-button (click)="login()" class="userMenuBtn">{{'keywords-login' | translate}}</button>
+
+  <mat-menu #userMenu="matMenu" overlapTrigger="false">
+    <button class="userButton menuOption" mat-menu-item (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>{{'keywords-logout'|translate}}</span>
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
+<div class="verticalSpacer"></div>
+
+
+<!-- Main Container -->
+<mat-drawer-container id="main-container" autosize [ngStyle]="{'z-index': menu.opened ? '1' : '0'}">
+  <!-- Sidebar Icons -->
+  <app-sidebar-icons></app-sidebar-icons>
+  <!-- Sidebar Title -->
+  <mat-drawer id="sidebar-title" mode="over" (mouseleave)="toggleSideNav($event)" #menu class="mat-elevation-z6">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+
+  <div id="mainPageContent">
+    <div class="pageTitle">
+      <i class="fas fa-caret-right"></i> {{sectionTitle | translate}}</div>
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

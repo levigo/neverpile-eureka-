@@ -1,0 +1,25 @@
+.error-container {
+  text-align: center;
+  background-color: #2081D6;
+  color: #fff;
+  height:100%;
+}
+
+.center  {
+  font-weight: 300;   
+  top: calc(50% - 140px);
+  left: calc(50% - 200px);
+  position: absolute;
+  height: 280px;
+  width: 400px;
+  padding-top: 32px;
+}
+
+.error-container h1 {
+  margin: 0;
+  font-size: 15em;
+}
+
+a{
+  color: #fff;
+}

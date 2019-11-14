@@ -1,0 +1,48 @@
+@import "./src/variables";
+*,
+::ng-deep * {
+  box-sizing: border-box;
+}
+
+.mat-card {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.card {
+  font-size: 14px;
+  padding: 24px;
+  
+  button {
+    display: block;
+    margin: 16px 0;
+  }
+}
+
+@media #{$res-sm},
+#{$res-md} {
+  .cardHolder {
+    display: block;
+  }
+  .card {
+    display: block;
+    width: 100%;
+  }
+  .card:not(:last-child){
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+  }
+}
+
+@media #{$res-nm},
+#{$res-lg} {
+  .cardHolder {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .card {
+    display: inline-block;
+    width: 50%;
+  }
+}

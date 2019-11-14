@@ -1,0 +1,55 @@
+<div id="dragAndDropContainer">
+  <ngx-file-drop (onFileDrop)="dropped($event)" customstyle="ngxDropper">
+    <div id="fileDropperBox">
+      <span id="fileDropperText" translate>text-file-upload-drop</span>
+      <br>
+      <input type="file" accept="" (change)="onFileChanged($event)" [value]="fileInputValue" #fileInput multiple>
+      <button mat-raised-button color="primary" type="button" (click)="fileInput.click()" id="browseButton">{{'keywords-open' | translate}}</button>
+    </div>
+  </ngx-file-drop>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z3" id="selectedFilesTable">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+      <td mat-footer-cell *matFooterCellDef><button mat-icon-button color="primary" type="button" (click)="removeSelected()" id="removeFilesButton">
+        <i class="fas fa-trash-alt"></i>
+      </button></td>   
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef translate> table-name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+      <td mat-footer-cell *matFooterCellDef><p>{{'text-file-upload-selection' | translate}} {{selection.selected.length}}</p></td>
+    </ng-container>
+    <!-- Size Column -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef translate> table-size </th>
+      <td mat-cell *matCellDef="let element">{{element.size}}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef translate> table-type </th>
+      <td mat-cell *matCellDef="let element">{{element.type}} </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>   
+  </table>
+</div>

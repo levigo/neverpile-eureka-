@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>NeverpileWebAdmin</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link type="text/scss" href="styles.scss" rel="stylesheet">
+  <style>
+    .minimums {
+      margin: 1em;
+    }
+  </style>
+  <script>
+    var browserLanguage = (navigator.languages && navigator.languages[0]) ||
+      navigator.browserLanguage ||
+      navigator.userLanguage ||
+      navigator.systemLanguage;
+
+    var supportedLanguages = ['de', 'en'];
+
+    let languages = [browserLanguage[0], browserLanguage[1]].join("");
+
+    if (supportedLanguages.includes(languages)) {
+      document.locale = languages
+    } else {
+      document.locale = 'en';
+    }
+    localStorage.setItem("language", document.locale);
+  </script>
+</head>
+
+<body>
+  <noscript>
+    <div class="minimums">
+      <span translate>text-Index-Noscropt</span>
+    </div>
+  </noscript>
+  <app-root>
+    <div id="nb-global-spinner" class="spinner">
+      <div class="blob blob-0"></div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="blob blob-5"></div>
+    </div>
+  </app-root>
+</body>
+
+</html>

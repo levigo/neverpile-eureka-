@@ -1,0 +1,71 @@
+<mat-drawer-container id="searchDrawer" autosize mode="side">
+  <mat-drawer mode="side" opened="true" class="component-toolbar mat-elevation-z1" id="tree">
+    <!-- Search -->
+    <div id="searchBar">
+      <mat-form-field id="queryInputField">
+        <input matInput type="text" placeholder="{{'heading-search-query' | translate}}" [(ngModel)]="searchQuery" (keyup.enter)="searchDocument(searchQuery)"/>
+        <button *ngIf="searchQuery" matSuffix mat-icon-button aria-label="Clear" (click)="searchQuery=''">
+          <i class="fas fa-times"></i>
+        </button>
+      </mat-form-field>
+      <button matSuffix mat-flat-button color="primary" (click)="searchDocument(searchQuery)" id="searchBtn">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <!-- Tree -->
+    <mat-tree [(dataSource)]="data" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle class="treeNode">
+        <li>
+          <div>
+            <mat-checkbox *ngIf="node.type=='content'" class="contentElementCB" (change)="contetntSelected(node.elementId, $event)"></mat-checkbox>
+            <button *ngIf="node.type!='content'" mat-icon-button class="treeControlIconBtn" [disabled]="loading && node.type=='addContent'" (click)="node.type=='addContent'?addOrRemoveContent(node):''">
+              <i *ngIf="node.type=='addContent'" class="fas fa-{{selectedContentElements.length == 0 ? 'plus' : 'minus'}}"></i>
+              <i *ngIf="node.type!='addContent'" class="fas fa-caret-right"></i>
+            </button>
+            <button mat-button *ngIf="node.type=='addContent'" (click)="addOrRemoveContent(node)" [disabled]="loading" class="nodeSelectBtn">{{(selectedContentElements.length == 0 ? 'dialog-new-content' : 'dialog-remove-content')| translate}}</button>
+            <button mat-button *ngIf="node.type!='addContent'" (click)="selectNode(node)" class="nodeSelectBtn">{{node.name| translate}}{{node.type == "content" ? ": " + node.fileName : ""}}</button>
+          </div>
+        </li>
+      </mat-tree-node>
+      <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" class="treeNode">
+        <li>
+          <div class="mat-tree-node">
+            <button mat-icon-button matTreeNodeToggle class="treeControlIconBtn">
+              <i class="fas {{treeControl.isExpanded(node) ? 'fa-angle-down' : 'fa-angle-right'}}"></i>
+            </button>
+            <button mat-button (click)="selectNode(node)" class="nodeSelectBtn">{{node.name| translate}}{{node.type == "document" ? ": " + node.documentId : ""}}</button>
+            <button mat-icon-button *ngIf="node.type=='document'" (click)="openDeleteDocumentDialog(node)" class="deleteIconBtn">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+          <ul [hidden]="!treeControl.isExpanded(node)" class="TreeTabsList">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </ul>
+        </li>
+      </mat-nested-tree-node>
+    </mat-tree>
+  </mat-drawer>
+  <!-- Document Details -->
+  <mat-drawer-content>
+    <mat-card id="details">
+      <mat-card-header>
+        <mat-card-title>
+          <h2> {{selectionHeader | translate}} </h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="previewContent==''" style="text-align:center;">
+        <img width="300" alt="Angular Logo" src="/assets/images/neverpile-logo.png" />
+      </mat-card-content>
+      <mat-card-content id="previewContent">
+        <!-- TODO: - Loading Spinner/Component -->
+        {{previewContent}}
+        <br/>
+        <mat-spinner [diameter]="35" id="loadingSpinner" *ngIf="loading"></mat-spinner>
+        <a #downloadFileBtn>
+          <button mat-flat-button  color="primary" *ngIf="showDownloadBtn" id="downloadBtn">download</button>
+        </a>
+        <app-jwt id ="jwt" #jwt [style.visibility]="showJWT ? 'visible' : 'hidden'"></app-jwt>
+      </mat-card-content>
+    </mat-card>
+  </mat-drawer-content>
+</mat-drawer-container>

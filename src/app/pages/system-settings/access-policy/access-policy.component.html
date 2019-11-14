@@ -1,0 +1,64 @@
+<mat-card>
+  <h3 translate>access-policy.current-policy</h3>
+  <mat-card *ngIf="currentPolicy">
+    <mat-card-header>
+        <mat-card-title translate>access-policy.start-of-validity</mat-card-title>
+        <mat-card-subtitle>{{currentPolicy.valid_from | date:'medium'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{currentPolicy.description}}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-progress-bar *ngIf="fetchCurrentInProgress" mode="indeterminate"></mat-progress-bar>
+
+  <h3 translate>access-policy.past-and-upcoming-policies</h3>
+  <div style="float: left">
+    <span translate>access-policy.select-range</span>:&nbsp;
+    <mat-form-field>
+      <input matInput [matDatepicker]="fromPicker" placeholder="{{ 'access-policy.start-date' | translate }}" [(ngModel)]="from" [max]="to" (dateChange)="refreshTable()">
+      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>  &nbsp;
+    <mat-form-field>
+      <input matInput [matDatepicker]="toPicker" placeholder="{{ 'access-policy.end-date' | translate }}" [(ngModel)]="to" [min]="from" (dateChange)="refreshTable()">
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div style="float: right">
+    <button mat-button (click)="refreshTable()"><i class="fas fa-sync"></i></button>
+  </div>
+
+  <table mat-table [dataSource]="policyListDataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="timeline">
+      <th mat-header-cell *matHeaderCellDef translate>access-policy.timeline.title</th>
+      <td mat-cell *matCellDef="let element">{{'access-policy.timeline.' + element.timeline | translate}}</td>
+    </ng-container>
+    <ng-container matColumnDef="valid_from">
+      <th mat-header-cell *matHeaderCellDef translate>access-policy.start-of-validity</th>
+      <td mat-cell *matCellDef="let element">{{element.valid_from | date:'medium'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef translate>keywords-description</th>
+      <td mat-cell *matCellDef="let element">{{element.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button *ngIf="element.timeline == 'upcoming'"
+          (click)="edit(element.timeline, element.valid_from)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button mat-icon-button *ngIf="element.timeline == 'current' || element.timeline == 'upcoming'"
+          (click)="editClone(element.timeline, element.valid_from)">
+          <i class="fas fa-clone"></i>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="row.timeline"></tr>
+  </table>
+
+  <mat-progress-bar [style.visibility]="refreshInProgress ? 'visible' : 'hidden'"  mode="indeterminate"></mat-progress-bar>
+</mat-card>

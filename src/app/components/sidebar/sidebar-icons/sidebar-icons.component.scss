@@ -1,0 +1,35 @@
+@import "./src/variables";
+
+:host {
+  position: fixed;
+  z-index: 3;
+  height: calc(100% - #{$toolbar-height});
+  background: white;
+  width: 64px;
+}
+
+i.fa,
+i.far,
+i.fas,
+i.fab {
+  font-size: 1.2em;
+  margin: auto;
+}
+
+.icon {
+  opacity: .7;
+  
+  &:hover {
+  opacity: .9;
+  }
+
+  &.active{
+    color: #2081d6; 
+  }
+}
+
+@media #{$res-sm}, #{$res-md} {
+  :host {
+    display: none;
+  }
+}

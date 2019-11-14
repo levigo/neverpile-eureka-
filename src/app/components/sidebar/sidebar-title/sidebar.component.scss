@@ -1,0 +1,46 @@
+@import "./src/variables";
+$spacer : $toolbar-height;
+:host {
+    position: absolute;
+    top: $spacer;
+    width: 100%;
+    height: calc(100% - #{$toolbar-height});
+    background: white;
+    margin-left: $toolbar-height;
+}
+
+a {
+    left: -$spacer;
+    padding-left: $spacer !important;
+    position: relative;
+    margin-right: -$spacer;
+    width: auto !important;
+}
+
+.description {
+    opacity: .7;
+    &:hover {
+        opacity: .9;
+    }
+    &.active {
+        color: #2081d6;
+    }
+}
+
+@media #{$res-sm}, #{$res-md}, #{$res-nm} {
+    ::ng-deep #main-container > .mat-drawer {
+      padding: 0 !important;
+    }
+}
+
+@media #{$res-nm}, #{$res-lg} {
+    :host {
+        ::ng-deep .mat-list-item-content {
+            padding: 0 !important;
+            width: 100%;
+        }
+        ::ng-deep .mat-ripple {
+            margin-left: -$spacer;
+        }
+    }
+}

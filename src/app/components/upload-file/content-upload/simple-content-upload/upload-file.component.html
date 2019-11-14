@@ -1,0 +1,9 @@
+<input type="file" accept="" (change)="onFileChanged($event)" #fileInput>
+
+<mat-form-field class="example-form-field">
+  <input matInput type="text" id="fileUpload" [(ngModel)]="fileName" disabled/>
+  <button mat-button *ngIf="fileName" matSuffix mat-icon-button aria-label="Clear" (click)="onClear()">
+    <i class="fas fa-times"></i>
+  </button>
+</mat-form-field>
+<button mat-raised-button color="primary" type="button" (click)="fileInput.click()">{{'keywords-open' | translate}}</button>

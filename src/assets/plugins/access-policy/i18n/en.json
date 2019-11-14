@@ -1,0 +1,35 @@
+{
+  "access-policy": {
+    "start-of-validity": "Start of validity",
+    "current-policy": "Current policy",
+    "past-and-upcoming-policies": "Past and upcoming policies",
+    "select-range": "Select range of policies to show",
+    "start-date": "Start date",
+    "end-date": "End date",
+    "timeline": {
+      "title": "Timeline",
+      "obsolete": "obsolete",
+      "current": "current",
+      "upcoming": "upcoming"
+    },
+    "edit": "Edit access policy",
+    "edit-new": "Edit new access policy",
+    "default-effect": "Default effect",
+    "effect": {
+      "ALLOW": "Allow access",
+      "DENY": "Deny access"
+    },
+    "rules": "Rules",
+    "subjects": "Subjects",
+    "resources": "Resources",
+    "actions": "Actions",
+    "add-rule": "Add rule",
+    "no-rules": "No rules",
+    "no-rules-long": "There are no rules defined in this policy",
+    "delete": "Delete policy",
+    "add-subject": "Type to add a subject",
+    "add-resource": "Type to add a resource",
+    "add-action": "Type to add an action",
+    "conditions": "Conditions"
+  }
+}

@@ -1,0 +1,25 @@
+h1{
+  font-size: 1.17em;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  font-weight: 600;
+}
+
+.dragAndDrop-content-upload{
+  padding: 0px 2px 0px 1.5px;
+}
+
+#loadingSpinner{
+  display: inline-block;
+  margin: -10px;
+}
+
+#documentUploadBtn{
+  margin-right: 15px;
+}
+
+#details{
+  white-space: pre;
+  min-height: calc(100% - 48px);
+  display: inline-block;
+}

@@ -1,0 +1,94 @@
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+}
+
+#tree{
+  margin-bottom: 88px;
+  height: 100%;
+}
+
+#details{
+  white-space: pre;
+  min-height: 100%;
+  padding: 0;
+  display: initial;
+}
+
+#queryInputField{
+  width: calc(100% - 55px);
+}
+
+#searchBar{
+  width: calc(100% - 20px); 
+  min-width: 400px;
+  padding: 0 10px;
+}
+
+#tree div{
+  white-space: nowrap;
+}
+
+#addDocumentButton{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+#searchDrawer{
+  background: white;
+  height: 100%;
+  width: 100%;
+}
+
+#searchBtn{
+  min-width: 0;
+  padding: 0 11px;
+  margin-left: 8px;
+}
+
+#previewContent{
+  padding: 10px;
+  height: calc(100% - 115px);
+}
+
+#jwt{
+  width: 100%;
+  height: 100%;
+}
+
+.treeNode{
+  display:initial;
+}
+
+.deleteIconBtn{
+  float: right;
+  height: 36px;
+  width: 36px;
+  line-height: 36px;
+}
+
+.mat-tree-node{
+  min-height: initial;
+}
+
+.nodeSelectBtn{
+  padding: 0 5px;
+  min-width: initial;
+}
+
+.treeControlIconBtn{
+  width: 36px;
+  height: 36px;
+  line-height: initial;
+  margin-right: -5px;
+}
+
+.TreeTabsList{
+  padding-left: 25px;
+}
+
+.contentElementCB{
+  margin: 0 3px 0 8px;
+}

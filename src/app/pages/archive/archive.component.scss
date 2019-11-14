@@ -1,0 +1,21 @@
+@import "./src/variables";
+
+:host {
+  ::ng-deep .mat-tab-body-wrapper {
+    height: 100%
+  }
+}
+
+#archiveCard {
+  min-height: 100%;
+  padding: 0;
+}
+#archiveTabGroup {
+  height: calc(100% - #{$toolbar-height});
+  width: calc(100% - (#{$toolbar-height} + 10px));
+  position: fixed;
+}
+
+::ng-deep .mat-tab-body-content {
+  overflow: auto !important;
+}

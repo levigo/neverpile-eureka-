@@ -1,0 +1,18 @@
+<div class="cardHolder">
+  <div class="card">
+    <h3 translate>Index hard reset</h3>
+    <span class="cardText" translate>
+      All index data will be lost and index gets reinitialized.
+    </span>
+    <button mat-raised-button color="primary" (click)="reset()">Start job</button>
+  </div>
+  <div class="card">
+    <h3 translate>Rebuild index</h3>
+    <span class="cardText" translate>
+      Rebuild the index from scratch. Information for the rebuild will be pulled directly from the database. Current index will
+      remain unchanged for all incoming requests until process is complete. Updates to the index during the process
+      will be included in the new index but wont be accessible until rebuild is complete.
+    </span>
+    <button mat-raised-button color="primary" (click)="rebuild()">Start job</button>
+  </div>
+</div>

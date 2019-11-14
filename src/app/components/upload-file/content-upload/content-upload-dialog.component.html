@@ -1,0 +1,12 @@
+<form #form="ngForm" (ngSubmit)="submit(form)">
+  <h1 mat-dialog-title>{{data.titel | translate}}</h1>
+  <div mat-dialog-content style="min-width: 10%;">
+    <label for="fileUpload">{{'dialog-content' | translate}} </label>
+    <br>
+    <app-drag-and-drop (changedFiles)="changedFiles($event)"></app-drag-and-drop>
+  </div>
+  <div mat-dialog-actions style="display: initial;">
+    <button mat-button type="button" style="float: right;" mat-dialog-close>{{'keywords-cancel' | translate}}</button>
+    <button mat-button class="submit_button"  [disabled]="selectedFiles.length == 0" [ngClass]="{'active' : selectedFiles.length >= 1}"  type="submit">{{'keywords-upload' | translate}}</button>   
+  </div>
+</form>

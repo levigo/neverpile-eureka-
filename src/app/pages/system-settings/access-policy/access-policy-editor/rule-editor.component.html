@@ -1,0 +1,42 @@
+
+<mat-form-field>
+  <input matInput placeholder="{{ 'keywords-description' | translate }}" [(ngModel)]="rule.name" name="description">
+</mat-form-field>
+<br>
+<mat-form-field>
+  <mat-select placeholder="{{ 'access-policy.effect' | translate }}" [(value)]="rule.effect" name="effect">
+    <mat-option *ngFor="let effect of effects" [value]="effect">
+      {{'access-policy.effect.' + effect | translate}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+
+<h4 translate>access-policy.subjects</h4>
+<string-list-editor
+  name="subject"
+  placeholder="{{ 'access-policy.add-subject' | translate }}"
+  [entries]="rule.subjects"
+  [hints]="subjectHints"
+></string-list-editor>
+
+<h4 translate>access-policy.resources</h4>
+<string-list-editor
+  name="resource"
+  placeholder="{{ 'access-policy.add-resource' | translate }}"
+  [entries]="rule.resources"
+  [hints]="resourceHints"
+></string-list-editor>
+
+<h4 translate>access-policy.actions</h4>
+<string-list-editor
+  name="action"
+  placeholder="{{ 'access-policy.add-action' | translate }}"
+  [entries]="rule.actions"
+  [hints]="actionHints"
+></string-list-editor>
+
+<h4 translate>access-policy.conditions</h4>
+<div (focusout)="onEditorBlur($event)" id="jsonEditorContainer" (mousedown)="resizeEditorStart()" (window:mouseup)="resizeEditorEnd()">
+  <json-editor [options]="editorOptions" [data]="rule.conditions" #conditionEditor></json-editor>
+</div>

@@ -1,0 +1,92 @@
+<mat-card *ngIf="policy" flex-gt-sm id="policyCard">
+  <form #policyForm="ngForm" id="policyForm">
+    <mat-card-header [ngSwitch]="mode">
+      <mat-card-title *ngSwitchCase="'edit'" translate>access-policy.edit</mat-card-title>
+      <mat-card-title *ngSwitchCase="'clone'" translate>access-policy.edit-new</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group (selectedIndexChange)="onTabChange($event)" dynamicHeight>
+        <mat-tab label="Editor">
+          <p>
+            <mat-form-field>
+              <input matInput [matDatepicker]="fromPicker" placeholder="{{ 'access-policy.start-of-validity' | translate }}" [(ngModel)]="policy.valid_from"
+                [min]="now" name="valid_from">
+              <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromPicker></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput placeholder="{{ 'keywords-description' | translate }}" [(ngModel)]="policy.description" name="description" rows="1">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-select placeholder="{{ 'access-policy.default-effect' | translate }}" [(value)]="policy.default_effect" name="default_effect">
+                <mat-option *ngFor="let effect of effects" [value]="effect">
+                  {{'access-policy.effect.' + effect | translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+          </p>
+          <h3 matSubheader translate>access-policy.rules</h3>
+          <mat-accordion *ngIf="policy.rules.length > 0" class="ruleAccordion">
+            <mat-expansion-panel *ngFor="let rule of policy.rules; let i = index; trackBy:trackByIndex" #rulePanel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{rule.name ? rule.name : '&lt;unnamed rule&gt;'}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{ 'access-policy.effect.' + rule.effect | translate}}:
+                  {{rule.subjects.length}} {{ 'access-policy.subjects' | translate }},
+                  {{rule.resources.length}} {{ 'access-policy.resources' | translate }},
+                  {{rule.actions.length}} {{ 'access-policy.actions' | translate }}
+                  <div actions>
+                    <button mat-icon-button appNoClickPropagation *ngIf="i > 0" (click)="moveRuleUp(policy, i)">
+                      <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <button mat-icon-button appNoClickPropagation *ngIf="i < policy.rules.length - 1" (click)="moveRuleDown(policy, i)">
+                      <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <button mat-icon-button appNoClickPropagation (click)="removeRule(policy, i)">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <app-rule-editor [rule]="rule"></app-rule-editor>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <div *ngIf="policy.rules.length == 0">
+            <div layout="column" layout-align="center center" class="tc-grey-500 mat-typography pad-lg">
+              <h2 translate>access-policy.no-rules</h2>
+              <h3 translate>access-policy.no-rules-long</h3>
+            </div>
+          </div>
+          <button mat-button (click)="addRule(policy)">{{ 'access-policy.add-rule' | translate | uppercase }}</button>
+        </mat-tab>
+        <mat-tab label="JSON">
+          <div id="jsonEditorContainer">
+            <json-editor [options]="editorOptions" (data)="policy" #policyEditor></json-editor>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+      <mat-list *ngIf="validationMessages.length > 0">
+        <mat-list-item *ngFor="let message of validationMessages">
+          <div [ngSwitch]="message.type">
+            <i class="fas fa-info-circle" *ngSwitchCase="'INFO'"></i>
+            <i class="fas fa-exclamation-circle" *ngSwitchCase="'WARNING'"></i>
+            <i class="fas fa-times-circle" *ngSwitchCase="'ERROR'"></i>
+          </div>
+          &nbsp;{{message.message}}
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </form>
+
+  <mat-card-actions>
+    <button mat-button (click)="cancel()">{{ 'keywords-cancel' | translate | uppercase}}</button>
+    <button mat-button (click)="delete(policy)" color="warn">{{ 'access-policy.delete' | translate | uppercase}}</button>
+    <button mat-button (click)="save(policy)" color="primary">{{ 'keywords-save' | translate | uppercase}}</button>
+  </mat-card-actions>
+</mat-card>

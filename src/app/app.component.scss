@@ -1,0 +1,169 @@
+@import "./src/variables";
+.verticalSpacer {
+  height: $toolbar-height;
+}
+
+mat-toolbar .spacer {
+  flex-grow: 1;
+}
+
+#main-toolbar {
+  color: #fff;
+  height: $toolbar-height;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  &>* {
+    height: 100%;
+  }
+  .mat-button {
+    min-width: 0;
+  }
+}
+
+#main-container {
+  overflow: visible;
+  height: calc(100% - #{$toolbar-height});
+}
+
+#mainPageContent {
+  height: 100%;
+  padding-left: $toolbar-height;
+}
+
+#sidebar-title {
+  min-width: 180px;
+  overflow: visible;
+  box-shadow: none;
+  position: fixed;
+  background: transparent;
+}
+
+#hamburger-button {
+  width: $toolbar-height;
+  i.fa,
+  i.far,
+  i.fas,
+  i.fab {
+    font-size: 1.2em;
+    margin: auto;
+  }
+}
+
+#section-title {
+  font-size: 1.4em;
+  font-weight: 300;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.pageTitle {
+  text-transform: uppercase;
+  font-size: 1.4em;
+  background: #888;
+  color: #eee;
+  padding: 10px 20px 10px 26px;
+}
+
+.userMenuBtn {
+  font-size: 1em;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  span {
+    margin-right: .3em;
+  }
+}
+
+.userButton {
+  opacity: .7;
+
+  span {
+    font-weight: 600;
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+  &.active {
+    color: #2081d6;
+  }
+}
+
+#languageMenuButton {
+  width: $toolbar-height;
+  opacity: 0.8;
+}
+
+.languageButton {
+  &.active {
+    color: #2081d6;
+    img {
+      box-shadow: 0 0 5px 2px #2081d6;
+      border-radius: 50%;
+    }
+  }
+}
+
+.menuOption {
+  span {
+    vertical-align: super !important;
+    margin-left: .5em;
+  }
+  i.fa,
+  i.far,
+  i.fas,
+  i.fab {
+    font-size: 1em;
+    margin: auto;
+    vertical-align: super;
+  }
+}
+
+::ng-deep .cdk-overlay-pane {
+  .mat-menu-content {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+
+::ng-deep .mat-drawer-backdrop {
+  margin-left: $toolbar-height;
+}
+
+@media #{$res-sm} {
+  .userMenuBtn {
+    span{
+      display: none;
+    }
+  }
+}
+
+@media #{$res-sm},
+#{$res-md} {
+  #main-container {
+    margin-left: 0px;
+    width: 100%;
+  }
+  #languageMenuButton {
+    display: none;
+  }
+  #section-title {
+    display: none;
+  }
+  #sidebar-title {
+    padding: 0 16px;
+  }
+}
+
+@media #{$res-nm},
+#{$res-lg} {
+  #main-container {
+    width: 100%;
+  }
+  .pageTitle {
+    display: none;
+  }
+}

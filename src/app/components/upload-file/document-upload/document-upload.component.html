@@ -1,0 +1,28 @@
+<div>
+  <h1>{{'dialog-new-document' | translate}}</h1>
+  <div>
+    <label for="documentID">{{'dialog-documentId' | translate}} </label>
+    <br>
+    <mat-form-field>
+      <input type="text" id="documentId" name="documentId" matInput [(ngModel)]="documentId">
+    </mat-form-field>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Detailed Document Info
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <json-editor [options]="editorOptions" #documentDtoEditor></json-editor>
+    </mat-expansion-panel>
+    <br>
+    <div class="dragAndDrop-content-upload">
+      <label for="fileUpload">{{'dialog-content' | translate}} </label>
+      <br>
+      <app-drag-and-drop (changedFiles)="onFileChanged($event)" #dragAndDrop></app-drag-and-drop>
+    </div>
+  </div>
+  <div style="display: initial;">
+    <button mat-raised-button color="primary" id="documentUploadBtn" (click)="addDocument()" [disabled]="loading">{{'keywords-upload' | translate}}</button>
+    <mat-spinner [diameter]="35" id="loadingSpinner" *ngIf="loading"></mat-spinner>
+  </div>
+</div>

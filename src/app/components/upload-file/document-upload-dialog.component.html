@@ -1,0 +1,18 @@
+<form #form="ngForm" (ngSubmit)="submit(form)">
+  <h1 mat-dialog-title>{{data.titel | translate}}</h1>
+  <div mat-dialog-content>
+    <label for="documentID">{{'dialog-documentId' | translate}}  </label>
+    <br>
+    <mat-form-field>
+      <input type="text" id="documentID" name="documentID" matInput [(ngModel)]="documentID">
+    </mat-form-field>
+    <br>
+    <label for="fileUpload">{{'dialog-content' | translate}} </label>
+    <br>
+   <app-drag-and-drop (changedFiles)="changedFiles($event)"></app-drag-and-drop>
+  </div>
+  <div mat-dialog-actions style="display: initial;">
+    <button mat-button type="button" style="float: right;" mat-dialog-close>{{'keywords-cancel' | translate}}</button>
+    <button mat-raised-button color="primary" type="submit" style="float: right;">{{'keywords-upload' | translate}}</button>   
+  </div>
+</form>
