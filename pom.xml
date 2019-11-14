@@ -36,7 +36,7 @@
 
   <scm>
     <url>https://levigo.de/stash/projects/NP/repos/neverpile-eureka-angular-client/browse</url>
-    <connection>scm:git:https://hennejg@levigo.de/stash/scm/np/neverpile-eureka-angular-client.git</connection>
+    <connection>scm:git:https://levigo.de/stash/scm/np/neverpile-eureka-angular-client.git</connection>
     <developerConnection>scm:git:ssh://git@levigo.de:7999/np/neverpile-eureka-angular-client.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
