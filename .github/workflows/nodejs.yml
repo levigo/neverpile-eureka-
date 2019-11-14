@@ -1,7 +1,7 @@
 name: Node CI
 
 on: [push]
-
+      
 jobs:
   build:
 
@@ -33,4 +33,9 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    
+    ## Deploy
+    - name: Deploy package
+      if: success() && (github.ref == 'master' || github.ref == 'feature/build-webjar')
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/levigo -Dtoken=GH_TOKEN
       
