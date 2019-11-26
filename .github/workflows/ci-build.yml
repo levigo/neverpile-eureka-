@@ -63,7 +63,7 @@ jobs:
     
     ## Deploy
     - name: Deploy package
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/deploy_to_registry.neverpile.com'
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/feature/deploy_to_registry.neverpile.com'
       env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             REPOSITORY_URL: ${{ secrets.REPOSITORY_URL }}
