@@ -1,9 +1,7 @@
 name: Continuous Integration (pull-request checks)
 
 on: 
-  push:
-    branches:
-      - master
+  - push
       
 jobs:
   build:
