@@ -1,6 +1,9 @@
-name: CI build
+name: Continuous Delivery (automatic versioning and deployment) 
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
       
 jobs:
   build:
@@ -88,15 +91,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: always() && github.ref == 'refs/heads/master'
-
-    - name: Notify slack about regular build
-      uses: hennejg/slack-build-notifier@v1.1
-      with:
-        username: GitHub
-        icon_emoji: octocat
-        channel: 'neverpile_ci'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: always() && github.ref != 'refs/heads/master'
