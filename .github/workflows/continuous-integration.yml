@@ -35,7 +35,7 @@ jobs:
         CI: true
 
     ## Notify Slack
-    - name: Notify slack about new release
+    - name: Notify slack about result
       uses: hennejg/slack-build-notifier@v1.1
       with:
         username: GitHub
