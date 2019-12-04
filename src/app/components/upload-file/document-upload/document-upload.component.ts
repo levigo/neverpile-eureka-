@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { JsonEditorOptions, JsonEditorComponent } from 'ang-jsoneditor';
 import { RequestService, DocumentDto } from '@service/request/request.service';
-import { environment } from '@environments/environment';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 
 @Component({
   selector: 'app-document-upload',
@@ -10,7 +10,7 @@ import { environment } from '@environments/environment';
   styleUrls: ['./document-upload.component.scss']
 })
 export class DocumentUploadComponent {
-  private neverpileHostURL: string = environment.neverpileUrl;
+  private neverpileHostURL = '';
   public previewContent = '';
   selectedFiles: File[] = [];
   documentId: string;
@@ -22,11 +22,12 @@ export class DocumentUploadComponent {
   @ViewChild('dragAndDrop', {static: true}) dragAndDrop;
   @ViewChild('documentDtoEditor', {static: true}) editor: JsonEditorComponent;
 
-  constructor(private requestService: RequestService, public snackBar: MatSnackBar) { 
+  constructor(private requestService: RequestService, private configurationService: ConfigurationService, public snackBar: MatSnackBar) { 
     this.editorOptions = new JsonEditorOptions()
     this.editorOptions.modes = ['code', 'tree'];
     this.editorOptions.mode = 'code';
     this.editorOptions.onChange = this.onJsonChange.bind(this);
+    this.neverpileHostURL = configurationService.getNeverpileUrl();
   }
 
   onFileChanged(files: File[]) {

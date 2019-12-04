@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { AuthenticationService } from '@service/authentication/auth.service';
 import { MatSidenav } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';

@@ -26,16 +26,15 @@ import { AuthenticationService } from '@service/authentication/auth.service';
 import { NotFoundComponent } from '@page/not-found/not-found.component';
 import { SidebarIconsComponent } from '@component/sidebar/sidebar-icons/sidebar-icons.component';
 import { PageControlService } from '@service/menu/pages/page-control.service';
-import { AuthConfig } from '@classe/auth-config';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { SearchComponent } from '@component/search/search.component';
 import { DocumentUploadComponent } from '@component/upload-file/document-upload/document-upload.component';
+import { ConfigurationService } from '@service/configuration/configuration.service'
 
 import { SystemSettingsModule } from '@page/system-settings/system-settings.module';
 import { CookieService } from 'ngx-cookie-service';
 import { I18NSnapInRegistry, I18nSnapIn } from '@service/i18n/i18n.service';
-import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { JwtComponent } from './components/jwt/jwt.component';
 
 export function HttpLoaderFactory(http: HttpClient, registry: I18NSnapInRegistry) {
@@ -87,10 +86,10 @@ export function HttpLoaderFactory(http: HttpClient, registry: I18NSnapInRegistry
   ],
   providers: [
     AuthenticationService,
-    AuthConfig,
     DocumentService,
     PageControlService,
     RequestService,
+    ConfigurationService,
     SidebarComponent,
     SidebarIconsComponent,
     CookieService,

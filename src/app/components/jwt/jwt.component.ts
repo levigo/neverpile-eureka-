@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { environment } from '@environments/environment';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 
 @Component({
   selector: 'app-jwt',
@@ -8,7 +8,7 @@ import { environment } from '@environments/environment';
   styleUrls: ['./jwt.component.scss']
 })
 export class JwtComponent {
-  constructor() { 
+  constructor(private configurationService: ConfigurationService) { 
     this.loadJWT();
   }
 
@@ -24,7 +24,7 @@ export class JwtComponent {
 
   loadJWT() {
     const scriptTag = document.createElement('script');
-    scriptTag.src = environment.jwtUrl + "/imageviewer/imageviewer.nocache.js"
+    scriptTag.src = this.configurationService.getJwtUrl() + "/imageviewer/imageviewer.nocache.js"
     scriptTag.type = 'text/javascript';
     scriptTag.async = false;
     document.getElementsByTagName('head')[0].appendChild(scriptTag);

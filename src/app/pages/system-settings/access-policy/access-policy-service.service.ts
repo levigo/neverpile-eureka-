@@ -1,9 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { RequestService } from '@service/request/request.service';
-import { environment } from '@environments/environment';
-import { Observable, ErrorObserver, of } from 'rxjs';
-import { catchError, retry, tap, map, shareReplay } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
+import { ConfigurationService } from '@service/configuration/configuration.service';
+import { Observable, of } from 'rxjs';
+import { catchError, retry, tap, shareReplay } from 'rxjs/operators';
 
 export enum Effect {
   ALLOW = 'ALLOW', DENY = 'DENY'
@@ -63,8 +62,8 @@ export class ValidationResult {
 export class AccessPolicyService {
   policyRepositoryUrl: string;
 
-  constructor(private requestService: RequestService) {
-    this.policyRepositoryUrl = environment.neverpileUrl + '/api/v1/authorization/policy';
+  constructor(private requestService: RequestService, private configurationService: ConfigurationService) {
+    this.policyRepositoryUrl = configurationService.getNeverpileUrl() + '/api/v1/authorization/policy';
   }
 
   fetchCurrentPolicy(): Observable<AccessPolicy> {

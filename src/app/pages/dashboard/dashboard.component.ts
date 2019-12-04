@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RequestService } from '@service/request/request.service';
 import { MatTableDataSource } from '@angular/material';
-import { environment } from '@environments/environment';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 
 export interface SpringBootAdminInfo {
   url: string;
@@ -27,11 +27,11 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['name', 'cluster', 'status'];
   dataSource = new MatTableDataSource([]);
 
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService, private configurationService: ConfigurationService) {
+    this.springBootAdminUrl = configurationService.getSpringBootAdminUrl();
+  }
 
   ngOnInit() {
-    this.springBootAdminUrl = environment.springBootAdmin;
-
     const auth = 'Basic ' + window.btoa(this.username + ':' + this.password);
     const href = this.springBootAdminUrl + '/applications';
 

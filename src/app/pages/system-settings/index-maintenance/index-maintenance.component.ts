@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ConfirmDialogComponent } from '@component/confirm-dialog/confirm-dialog.component';
-import { environment } from '@environments/environment';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 import { RequestService } from '@service/request/request.service';
 
 @Component({
@@ -10,9 +10,11 @@ import { RequestService } from '@service/request/request.service';
   styleUrls: ['./index-maintenance.component.scss']
 })
 export class IndexMaintenanceComponent implements OnInit {
-  neverpileHostURL: string = environment.neverpileUrl;
+  neverpileHostURL: string;
 
-  constructor(public dialog: MatDialog, public snackBar: MatSnackBar, private requestService: RequestService) { }
+  constructor(public dialog: MatDialog, public snackBar: MatSnackBar, private requestService: RequestService, private configurationService: ConfigurationService) {
+    this.neverpileHostURL = configurationService.getNeverpileUrl();
+  }
 
   ngOnInit() { }
 

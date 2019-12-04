@@ -20,9 +20,10 @@
       "@service/*": ["./src/app/services/*"],
       "@component/*": ["./src/app/components/*"],
       "@page/*": ["./src/app/pages/*"],
-      "@classe/*": ["./src/app/classes/*"],
       "@environments/*":["./src/environments/*"],
       "core-js/es7/reflect": ["node_modules/core-js/proposals/reflect-metadata"]
-    }
+    },
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   }
 }
