@@ -3,10 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  isProduction: false,
-  neverpileUrl: 'http://127.0.0.1:8080',
-  springBootAdminUrl: 'http://127.0.0.1:1001',
-  jwtUrl: 'http://127.0.0.1:8888'
+  production: false
 };
 
 /*

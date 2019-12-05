@@ -1,47 +1,58 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import config from '../../../../configuration.json';
+
+export interface Configuration {
+  neverpileUrl?: string,
+  springBootAdminUrl?: string,
+  jwtUrl?: string,
+  authUsername?: string,
+  authPassword?: string,
+  authClientName?: string,
+  authSecret?: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigurationService {
+  private config: Configuration;
 
-  constructor() {
-      console.log("configuration loaded:")
-      console.log(config);
-   }
+  constructor() {  }
 
-  isProduction(): boolean{
-    return environment.isProduction ? environment.isProduction : true;
-  }
-  
-  getNeverpileUrl(): string{
-    return config && config.neverpileUrl ? config.neverpileUrl : "http://127.0.0.1:8080";
+  setConfig(newConfig: Configuration) {
+    this.config = newConfig;
   }
 
-  getSpringBootAdminUrl(): string{
-    return config && config.springBootAdminUrl ? config.springBootAdminUrl : "http://127.0.0.1:1001";
+  isProduction(): boolean {
+    return environment.production ? environment.production : true;
   }
 
-  getJwtUrl(): string{
-    return config && config.jwtUrl ? config.jwtUrl : "http://127.0.0.1:8888";
+  getNeverpileUrl(): string {
+    return this.config && this.config.neverpileUrl ? this.config.neverpileUrl : "http://127.0.0.1:8080";
   }
 
-  getAuthUsername(): string{
-    return config && config.authUsername ? config.authUsername : 'admin';
+  getSpringBootAdminUrl(): string {
+    return this.config && this.config.springBootAdminUrl ? this.config.springBootAdminUrl : "http://127.0.0.1:1001";
   }
 
-  getAuthPassword(): string{
-    return config && config.authPassword ? config.authPassword : 'admin';
+  getJwtUrl(): string {
+    return this.config && this.config.jwtUrl ? this.config.jwtUrl : "http://127.0.0.1:8888";
   }
 
-  getAuthClientName(): string{
-    return config && config.authClientName ? config.authClientName : 'trusted-app';
+  getAuthUsername(): string {
+    return this.config && this.config.authUsername ? this.config.authUsername : 'admin';
   }
 
-  getAuthSecret(): string{
-    return config && config.authSecret ? config.authSecret : 'secret';
+  getAuthPassword(): string {
+    return this.config && this.config.authPassword ? this.config.authPassword : 'admin';
+  }
+
+  getAuthClientName(): string {
+    return this.config && this.config.authClientName ? this.config.authClientName : 'trusted-app';
+  }
+
+  getAuthSecret(): string {
+    return this.config && this.config.authSecret ? this.config.authSecret : 'secret';
   }
 
   public getAuthUrl(): string {
