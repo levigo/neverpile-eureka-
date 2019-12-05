@@ -43,7 +43,7 @@ export function HttpLoaderFactory(http: HttpClient, registry: I18NSnapInRegistry
   return registry.loaderFactory();
 }
 
-function load(http: HttpClient, configurationService: ConfigurationService): (() => Promise<boolean>) {
+export function load(http: HttpClient, configurationService: ConfigurationService): (() => Promise<boolean>) {
   return (): Promise<boolean> => {
     return new Promise<boolean>((resolve: (a: boolean) => void): void => {
       http.get('./web/configuration.json')
