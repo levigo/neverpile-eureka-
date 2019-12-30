@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { AuthConfig } from '@classe/auth-config';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -17,7 +17,7 @@ export class AuthenticationService {
   private errorResponse: string;
 
   constructor(
-    private authConfig: AuthConfig,
+    private configurationService: ConfigurationService,
     private http: HttpClient,
     private cookieService: CookieService
   ) {
@@ -69,9 +69,9 @@ export class AuthenticationService {
   }
 
   private getAccessToken() {
-    const requestBody = 'grant_type=password&username=' + this.authConfig.username + '&password=' +
-      this.authConfig.password + '&client_id=' + this.authConfig.client;
-    const auth = 'Basic ' + window.btoa(this.authConfig.client + ':' + this.authConfig.secret);
+    const requestBody = 'grant_type=password&username=' + this.configurationService.getAuthUsername() + '&password=' +
+      this.configurationService.getAuthPassword() + '&client_id=' + this.configurationService.getAuthClientName();
+    const auth = 'Basic ' + window.btoa(this.configurationService.getAuthClientName() + ':' + this.configurationService.getAuthSecret());
 
     this.sendAuthRequest(auth, requestBody).subscribe(result => {
       this.accessToken = result.access_token;
@@ -95,6 +95,6 @@ export class AuthenticationService {
       }),
       responseType: 'json' as 'text'
     };
-    return this.http.post(this.authConfig.auth_url, requestBody, httpOptions);
+    return this.http.post(this.configurationService.getAuthUrl(), requestBody, httpOptions);
   }
 }

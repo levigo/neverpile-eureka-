@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { SystemSettingsComponent, SystemSettingsSnapIn } from '@page/system-settings/system-settings.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../material.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { AccessPolicyModule } from '@page/system-settings/access-policy/access-policy.module';
 import { PlaceholderComponent } from './placeholder/placeholder.component';
 import { IndexMaintenanceComponent } from './index-maintenance/index-maintenance.component';

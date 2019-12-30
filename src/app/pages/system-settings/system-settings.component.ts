@@ -1,8 +1,6 @@
 import { Component, OnInit, Type, Inject, InjectionToken } from '@angular/core';
 import { RequestService } from '@service/request/request.service';
-import { environment } from '@environments/environment';
-import { isDefined } from '@angular/compiler/src/util';
-import { I18nSnapIn } from '@service/i18n/i18n.service';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 
 /**
  * A descriptor for snap-ins into the system-settings area.
@@ -25,12 +23,13 @@ export class SystemSettingsSnapIn {
 })
 export class SystemSettingsComponent implements OnInit {
   title = 'Neverpile';
-  neverpileHostURL: string = environment.neverpileUrl;
+  neverpileHostURL: string;
 
   currentSettingsIndex = -1;
 
-  constructor(private requestService: RequestService, @Inject(SystemSettingsSnapIn) public snapIns: SystemSettingsSnapIn[]) {
+  constructor(private requestService: RequestService, private configurationService: ConfigurationService, @Inject(SystemSettingsSnapIn) public snapIns: SystemSettingsSnapIn[]) {
     this.snapIns.sort((a, b) => (this.prio(b) - this.prio(a)));
+    this.neverpileHostURL = configurationService.getNeverpileUrl();
   }
 
   prio(s: SystemSettingsSnapIn): number {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '@environments/environment';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 
 @Component({
   selector: 'app-api',
@@ -8,9 +8,11 @@ import { environment } from '@environments/environment';
 })
 export class ApiComponent implements OnInit {
 
-  host = environment.neverpileUrl;
+  host = '';
 
-  constructor() {}
+  constructor(private configurationService: ConfigurationService) {
+    this.host = configurationService.getNeverpileUrl();
+  }
 
   ngOnInit() {
   }

@@ -3,7 +3,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatSnackBar, MatDialog, MatCheckboxChange } from '@angular/material';
 import { of } from 'rxjs';
 
-import { environment } from '@environments/environment';
+import { ConfigurationService } from '@service/configuration/configuration.service';
 import { ContentUploadDialogComponent } from '@component/upload-file/content-upload/content-upload-dialog.component';
 import { ConfirmDialogComponent } from '@component/confirm-dialog/confirm-dialog.component';
 import { JwtComponent } from '@component/jwt/jwt.component'
@@ -31,10 +31,11 @@ const GetChildren = (node: NodeData) => of(node.children);
 })
 
 export class SearchComponent {
+  
   selectionHeader: string;
   previewContent = '';
   selectedDocumentId = '';
-  neverpileHostURL: string = environment.neverpileUrl;
+  neverpileHostURL = '';
   searchQuery;
   treeControl = new NestedTreeControl(GetChildren);
   loading = false;
@@ -45,7 +46,10 @@ export class SearchComponent {
 
   selectedContentElements = [];
 
-  constructor(private requestService: RequestService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(private requestService: RequestService, private configurationService: ConfigurationService, 
+    public dialog: MatDialog, public snackBar: MatSnackBar) { 
+      this.neverpileHostURL = configurationService.getNeverpileUrl();
+    }
 
   data = [];
   hasChild(_: number, node: NodeData) {
