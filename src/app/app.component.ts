@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
           return; // only toggle when exit on backdrop
         }
       } else {
-        return; // invalit mouseleave target
+        return; // invalid mouseleave target
       }
     }
     this.menu.toggle();
