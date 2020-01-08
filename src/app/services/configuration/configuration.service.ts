@@ -8,7 +8,8 @@ export interface Configuration {
   authUsername?: string,
   authPassword?: string,
   authClientName?: string,
-  authSecret?: string
+  authSecret?: string,
+  authType?: string
 }
 
 @Injectable({
@@ -19,40 +20,44 @@ export class ConfigurationService {
 
   constructor() {  }
 
-  setConfig(newConfig: Configuration) {
+  public setConfig(newConfig: Configuration) {
     this.config = newConfig;
   }
 
-  isProduction(): boolean {
+  public isProduction(): boolean {
     return environment.production ? environment.production : true;
   }
 
-  getNeverpileUrl(): string {
+  public getNeverpileUrl(): string {
     return this.config && this.config.neverpileUrl ? this.config.neverpileUrl : "http://127.0.0.1:8080";
   }
 
-  getSpringBootAdminUrl(): string {
+  public getSpringBootAdminUrl(): string {
     return this.config && this.config.springBootAdminUrl ? this.config.springBootAdminUrl : "http://127.0.0.1:1001";
   }
 
-  getJwtUrl(): string {
+  public getJwtUrl(): string {
     return this.config && this.config.jwtUrl ? this.config.jwtUrl : "http://127.0.0.1:8888";
   }
 
-  getAuthUsername(): string {
+  public getAuthUsername(): string {
     return this.config && this.config.authUsername ? this.config.authUsername : 'admin';
   }
 
-  getAuthPassword(): string {
+  public getAuthPassword(): string {
     return this.config && this.config.authPassword ? this.config.authPassword : 'admin';
   }
 
-  getAuthClientName(): string {
+  public getAuthClientName(): string {
     return this.config && this.config.authClientName ? this.config.authClientName : 'trusted-app';
   }
 
-  getAuthSecret(): string {
+  public getAuthSecret(): string {
     return this.config && this.config.authSecret ? this.config.authSecret : 'secret';
+  }
+
+  public getAuthType(): string {
+    return this.config && this.config.authType ? this.config.authType : 'basic';
   }
 
   public getAuthUrl(): string {

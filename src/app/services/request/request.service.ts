@@ -17,7 +17,7 @@ export class RequestService {
 
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
-  request(path: string, contentType: string = 'application/json', responseType: ResponseType = 'json', auth: string = 'Bearer ' + this.authService.accessToken) {
+  request(path: string, contentType: string = 'application/json', responseType: ResponseType = 'json', auth: string = this.authService.accessToken) {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -51,7 +51,7 @@ export class RequestService {
 
     const req = new HttpRequest('POST', url, formData, {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + this.authService.accessToken
+        'Authorization': this.authService.accessToken
       })
     });
     return this.http.request(req);
@@ -66,7 +66,7 @@ export class RequestService {
 
     const req = new HttpRequest('POST', url, formData, {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + this.authService.accessToken
+        'Authorization': this.authService.accessToken
       })
     });
     return this.http.request(req);

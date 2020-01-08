@@ -69,12 +69,25 @@ export class AuthenticationService {
   }
 
   private getAccessToken() {
+    if (this.configurationService.getAuthType() == "OAuth2") {
+      this.setOAuthToken();
+    } else {
+      this.setBasicAuthToken();
+    }
+
+  }
+
+  private setBasicAuthToken(){
+    this.accessToken = 'Basic ' + window.btoa(this.configurationService.getAuthUsername() + ':' + this.configurationService.getAuthPassword());
+  }
+
+  private setOAuthToken(){
     const requestBody = 'grant_type=password&username=' + this.configurationService.getAuthUsername() + '&password=' +
       this.configurationService.getAuthPassword() + '&client_id=' + this.configurationService.getAuthClientName();
     const auth = 'Basic ' + window.btoa(this.configurationService.getAuthClientName() + ':' + this.configurationService.getAuthSecret());
 
     this.sendAuthRequest(auth, requestBody).subscribe(result => {
-      this.accessToken = result.access_token;
+      this.accessToken = 'Bearer ' + result.access_token;
       this.authSubject.next(true);
       this.response = JSON.stringify(result, null, 4);
       this.errorResponse = '';

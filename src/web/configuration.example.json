@@ -5,5 +5,6 @@
   "authUsername": "admin",
   "authPassword": "admin",
   "authClientName": "trusted-app",
-  "authSecret": "secret"
+  "authSecret": "secret",
+  "authType": "basic"
 }
