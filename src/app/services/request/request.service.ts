@@ -22,7 +22,8 @@ export class RequestService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': contentType,
-        'Authorization': auth
+        'Authorization': auth,
+        'Accept': contentType
       }),
       responseType: responseType as 'json',
       params: new HttpParams()
