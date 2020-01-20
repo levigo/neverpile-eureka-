@@ -156,7 +156,7 @@ export class SearchComponent {
         return;
       }
       this.previewContent = JSON.stringify(result, null, 4);
-      this.searchDocument(this.searchQuery);
+      this.searchDocument(this.selectedDocumentId);
       this.loading = false;
     }, error => {
       console.error(error);
